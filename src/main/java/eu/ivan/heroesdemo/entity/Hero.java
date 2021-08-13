@@ -21,9 +21,9 @@ public class Hero {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	public long getId() {
-		return id;
-	}
+	@Column(name = "color", nullable = true, length = 20)
+	private String color;
+
 
 	public Hero() {
 
@@ -54,6 +54,11 @@ public class Hero {
 //		return Objects.hash(id, name);
 //	}
 
+	public long getId() {
+		return id;
+	}
+
+
 	public void setId(Long heroId) {
 		this.id = heroId;
 	}
@@ -66,9 +71,17 @@ public class Hero {
 		this.name = name;
 	}
 
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	@Override
 	public String toString() {
-		return "Hero [id=" + id + ", name=" + name + "]";
+		return "Hero [id=" + id + ", name=" + name + "color="+ color + "]";
 	}
 
 }

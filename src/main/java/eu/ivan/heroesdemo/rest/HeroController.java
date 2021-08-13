@@ -16,14 +16,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.ivan.heroesdemo.entity.Hero;
 import eu.ivan.heroesdemo.repository.HeroRepository;
+import eu.ivan.heroesdemo.service.ColorService;
 
 @RequestMapping("/api/heroes")
 @RestController
 public class HeroController {
 	
-	@Autowired
 	private HeroRepository heroes;
+	private ColorService colorService;
+
 	
+	
+	public HeroController(HeroRepository heroes, ColorService colorService) {
+		this.heroes = heroes;
+		this.colorService = colorService;
+	}
+
 	@GetMapping("")
 	public List<Hero> listAll(@RequestParam(required = false) String name) {
 		if (name != null && name.length()>0) {
@@ -39,6 +47,7 @@ public class HeroController {
 	
 	@PostMapping("")
 	public Hero save(@RequestBody Hero hero) {
+		hero.setColor(colorService.getColorForName(hero.getName()));
 		if (hero.getId() != 0) throw new RuntimeException("id must not be specified on insert");
 		return heroes.save(hero);
 	}
