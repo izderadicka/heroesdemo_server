@@ -5,7 +5,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import eu.ivan.heroesdemo.entity.Hero;
 import eu.ivan.heroesdemo.repository.HeroRepository;
@@ -13,14 +16,17 @@ import eu.ivan.heroesdemo.rest.HeroController;
 import eu.ivan.heroesdemo.service.ColorService;
 import eu.ivan.heroesdemo.service.LocalColorService;
 
+
+@ExtendWith(MockitoExtension.class)
 public class ControllerTest {
+
+    @Mock
+    private HeroRepository heroes;
 
 
     @Test
     public void testHeroSave() {
-        HeroRepository heroes = Mockito.mock(HeroRepository.class);
         ColorService colorService = new LocalColorService();
-
         HeroController ctrl = new HeroController(heroes, colorService);
 
         when(heroes.save(any(Hero.class))).thenAnswer(
