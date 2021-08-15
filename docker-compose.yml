@@ -34,12 +34,23 @@ services:
   heroesdemo:
     depends_on: 
       - postgres
+      - color-service
     build: .
     image: heroesdemo
     environment:
       spring_profiles_active: docker
     ports:
       - 8080:8080
+    networks:
+      - postgres
+
+  color-service:
+    build: ../color-service
+    image: color-service
+    environment:
+      spring_profiles_active: docker
+    ports:
+      - 8081:8081
     networks:
       - postgres
 
