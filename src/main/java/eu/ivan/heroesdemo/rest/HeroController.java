@@ -3,6 +3,8 @@ package eu.ivan.heroesdemo.rest;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,8 @@ import eu.ivan.heroesdemo.service.ColorService;
 @RequestMapping("/api/heroes")
 @RestController
 public class HeroController {
+
+	private static final Logger log = LoggerFactory.getLogger(HeroController.class);
 	
 	private HeroRepository heroes;
 	private ColorService colorService;
@@ -34,6 +38,7 @@ public class HeroController {
 
 	@GetMapping("")
 	public List<Hero> listAll(@RequestParam(required = false) String name) {
+		log.debug("Calling listAll method in controller");
 		if (name != null && name.length()>0) {
 			return heroes.findByName(name);
 		}

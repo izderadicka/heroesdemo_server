@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 @Primary
 public class RemoteColorService implements ColorService {
 
-    private static final Logger log = LoggerFactory.getLogger(ColorService.class);
+    private static final Logger log = LoggerFactory.getLogger(RemoteColorService.class);
 
     private WebClient.Builder clientBuilder;
     private Environment env;

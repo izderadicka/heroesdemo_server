@@ -33,7 +33,8 @@ public class HeroesdemoApplication implements WebMvcConfigurer {
 
     @Bean
     public WebClient.Builder webClientBuilder(Environment env) {
-        int timeout = Integer.parseInt(env.getProperty("service.timeout"));
+        String timeoutProperty = env.getProperty("service.timeout");
+        int timeout = timeoutProperty != null ? Integer.parseInt(timeoutProperty) : 5000;
         if (timeout < 1000) timeout = 1000;
 
         HttpClient httpClient = HttpClient.create().option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
