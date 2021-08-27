@@ -50,7 +50,7 @@ spec:
           # 4) docker push minikube:5000/heroesdemo
           #  
           # note that inside minikube registry host is locahost
-          image: localhost:5000/heroesdemo 
+          image: heroesdemo 
           imagePullPolicy: IfNotPresent
           name: heroesdemo
           ports:

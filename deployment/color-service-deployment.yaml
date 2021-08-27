@@ -28,11 +28,21 @@ spec:
         - env:
             - name: spring_profiles_active
               value: docker
+            - name: SPOILER_TYPE
+              value: NONE
+            - name: SPOILER_MTTF
+              value: "1000"
           image: color-service
           imagePullPolicy: IfNotPresent
           name: color-service
           ports:
             - containerPort: 8081
+          livenessProbe:
+            httpGet:
+              path: /color
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 3
           resources: {}
       restartPolicy: Always
 status: {}
