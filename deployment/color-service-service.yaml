@@ -10,8 +10,8 @@ metadata:
   name: color-service
 spec:
   ports:
-    - name: "8081"
-      port: 8081
+    - name: "8080"
+      port: 8080
       targetPort: 8081
   type: NodePort
   selector:
